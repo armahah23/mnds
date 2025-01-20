@@ -7,8 +7,6 @@ export default {
     extend: {
       screens: {
         'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
         'xl': '1280px',
         '2xl': '1536px',
       },
@@ -31,6 +29,9 @@ export default {
         '2xl': '24px',
         '3xl': '30px',
         '4xl': '36px',
+      },
+      fontFamily: {
+        'noto-serif': ['"Noto Serif"', 'serif'],
       },
     },
   },
