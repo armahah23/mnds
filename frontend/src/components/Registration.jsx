@@ -2,9 +2,14 @@ import { FcGoogle } from "react-icons/fc";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import registeration from '../assets/images/registration.jpg';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import registeration from "../assets/images/registration.jpg";
+import Swal from "sweetalert2";
 
 const Registration = () => {
+  const navigate = useNavigate();
+
   const initialValues = {
     fullName: "",
     phoneNumber: "",
@@ -25,6 +30,22 @@ const Registration = () => {
       .required("Confirm Password is required"),
   });
 
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post("http://localhost:3000/users", values);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      console.log("User registered successfully:", response.data);
+      Swal.fire({
+        title: "Registration Success!",
+        icon: "success",
+        draggable: true,
+      });
+      navigate("/login");
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <div className="md:w-1/2 flex items-center justify-center bg-gray-200">
@@ -38,7 +59,7 @@ const Registration = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleSubmit}
         >
           <Form className="w-full max-w-sm">
             <h1 className="text-xl font-bold mb-4 text-blue-700">Register</h1>
@@ -140,14 +161,14 @@ const Registration = () => {
               </p>
               <p className="text-md text-gray-700">Or login with</p>
               <div className="flex justify-center items-center gap-2">
-              <button className="btn w-full mt-2 bg-red-500 text-sm flex items-center justify-center gap-4">
-                <FcGoogle className="text-xl" />
-                Google
-              </button>
-              <button className="btn w-full mt-2 bg-blue-700 text-sm flex items-center justify-center gap-4">
-                <FaSquareFacebook className="text-xl" />
-                Facebook
-              </button>
+                <button className="btn w-full mt-2 bg-red-500 text-sm flex items-center justify-center gap-4">
+                  <FcGoogle className="text-xl" />
+                  Google
+                </button>
+                <button className="btn w-full mt-2 bg-blue-700 text-sm flex items-center justify-center gap-4">
+                  <FaSquareFacebook className="text-xl" />
+                  Facebook
+                </button>
               </div>
             </div>
           </Form>

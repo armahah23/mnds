@@ -2,9 +2,14 @@ import { FcGoogle } from "react-icons/fc";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 import loginpage from '../assets/images/loginpage.jpg';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const initialValues = {
     email: "",
     password: "",
@@ -17,13 +22,44 @@ const Login = () => {
     password: Yup.string().required("Password is required"),
   });
 
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.get('http://localhost:3000/users', {
+        params: {
+          email: values.email,
+          password: values.password,
+        },
+      });
+      if (response.data.length > 0) {
+        localStorage.setItem('user', JSON.stringify(response.data[0]));
+        console.log('User logged in successfully:', response.data[0]);
+        Swal.fire({
+          title: "Login Success!",
+          icon: "success",
+          draggable: true
+        });
+        navigate('/');
+      } else {
+        console.error('Invalid email or password');
+        Swal.fire({
+          title: "Login Failed!",
+          text: "Invalid email or password",
+          icon: "error",
+          draggable: true
+      });
+    }
+    } catch (error) {
+      console.error('Error logging in user:', error);
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <div className="md:w-1/2 flex items-center justify-center p-4">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleSubmit}
         >
           <Form className="w-full max-w-sm">
             <h1 className="text-2xl text-blue-700 font-bold mb-4">Login</h1>
@@ -64,7 +100,7 @@ const Login = () => {
             </button>
             <div className="mt-2 text-center">
               <p className="text-gray-700">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <a href="/register" className="text-blue-500">
                   Register here
                 </a>
