@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +7,7 @@
 
 /* Main content area */
 .main_content {
-  @apply p-4 md:p-8 lg:p-12;
+  @apply p-4 md:p-8 bg-gray-700 lg:p-12;
 }
 
 /* Header section */
@@ -61,4 +62,13 @@ h2, .h2 {
 
 p, .p {
   @apply text-base md:text-lg lg:text-xl;
+}
+
+.main_header {
+  @apply text-8xl font-jersey-15;
+}
+ 
+/* Ensure the custom font family is applied */
+.font-jersey-15 {
+  font-family: 'Jersey 15', sans-serif;
 }

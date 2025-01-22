@@ -32,8 +32,17 @@ export default {
       },
       fontFamily: {
         'noto-serif': ['"Noto Serif"', 'serif'],
+        'jersey-15': ['"Jersey 15"', 'sans-serif'],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.font-jersey-15': {
+          fontFamily: 'jersey-15, sans-serif',
+        },
+      }, ['responsive', 'hover']);
+    },
+  ],
 }
