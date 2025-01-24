@@ -24,7 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path='/publisher/*' element={<PublisherHome />} />
           <Route path='/about' element={<About />} />
-          <Route path='/newfeed' element={<NewPost />} />
+          <Route path='/publisher/newfeed' element={<NewPost />} />
         </Route>
       </Routes>
     </AuthProvider>
