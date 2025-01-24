@@ -7,6 +7,7 @@ import NewPost from './components/NewPost'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
 import About from './pages/About'
+import WelcomePage from './pages/WelcomePage'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <>
       <AuthProvider>
       <Routes>
+        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route element={<PrivateRoute />}>

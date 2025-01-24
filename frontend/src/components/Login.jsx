@@ -1,5 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaSquareFacebook } from "react-icons/fa6";
+import { IoIosHome } from "react-icons/io";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Swal from 'sweetalert2';
@@ -55,7 +56,10 @@ const Login = () => {
           onSubmit={handleSubmit}
         >
           <Form className="w-full max-w-sm">
+          <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl text-blue-700 font-bold mb-4">Login</h1>
+            <IoIosHome className="text-2xl text-blue-700 cursor-pointer" onClick={()=>navigate("/welcome")} />
+          </div>
             <div className="mb-2">
               <label htmlFor="email" className="block text-gray-700 text-sm">
                 Email
