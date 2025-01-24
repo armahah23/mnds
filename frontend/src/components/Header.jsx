@@ -2,7 +2,7 @@ import bg_container from "../assets/images/bg_container.jpg";
 
 function Header() {
   return (
-    <section>
+    <section className="mt-4">
       <div>
         <div
           className="bg-gray-800 text-white py-8 h-[400px] flex justify-center items-center"
