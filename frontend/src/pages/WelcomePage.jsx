@@ -54,7 +54,7 @@ function WelcomePage() {
 
         <div className="flex gap-8">
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/login', { state: { role: 'user' } })}
             className="px-8 py-3 bg-white text-purple-600 rounded-full font-semibold
                        hover:bg-purple-600 hover:text-white transition-all duration-300
                        transform hover:scale-105 shadow-lg"
@@ -62,7 +62,7 @@ function WelcomePage() {
             User
           </button>
           <button
-            onClick={() => navigate('/publisher')}
+            onClick={() => navigate('/login', { state: { role: 'publisher' } })}
             className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold
                        hover:bg-white hover:text-purple-600 transition-all duration-300
                        transform hover:scale-105 shadow-lg"

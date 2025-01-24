@@ -2,7 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import registeration from "../assets/images/registration.jpg";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
@@ -10,6 +10,8 @@ import { useAuth } from "../context/AuthContext";
 const Registration = () => {
   const navigate = useNavigate();
   const { register } = useAuth();
+  const location = useLocation();
+  const role = new URLSearchParams(location.search).get("role") || "user";
 
   const initialValues = {
     fullName: "",
@@ -17,6 +19,7 @@ const Registration = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: role,
   };
 
   const validationSchema = Yup.object({
@@ -38,17 +41,18 @@ const Registration = () => {
         email: values.email,
         password: values.password,
         phoneNumber: values.phoneNumber,
+        role: role,
       };
 
       const success = await register(userData);
-      
+
       if (success) {
         Swal.fire({
           title: "Registration Success!",
           icon: "success",
           draggable: true,
         });
-        navigate("/login");
+        navigate("/login", { state: { role: role } });
       } else {
         Swal.fire({
           title: "Registration Failed!",

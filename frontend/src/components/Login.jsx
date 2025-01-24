@@ -3,14 +3,16 @@ import { FaSquareFacebook } from "react-icons/fa6";
 import { IoIosHome } from "react-icons/io";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom";
-import loginpage from '../assets/images/loginpage.jpg';
+import Swal from "sweetalert2";
+import { useNavigate, useLocation } from "react-router-dom";
+import loginpage from "../assets/images/loginpage.jpg";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const role = location.state?.role || "user";
 
   const initialValues = {
     email: "",
@@ -26,24 +28,24 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const success = await login(values.email, values.password);
+      const success = await login(values.email, values.password, role);
       if (success) {
         Swal.fire({
           title: "Login Success!",
           icon: "success",
-          draggable: true
+          draggable: true,
         });
-        navigate('/');
+        navigate(role === "publisher" ? "/publisher" : "/");
       } else {
         Swal.fire({
           title: "Login Failed!",
           text: "Invalid email or password",
           icon: "error",
-          draggable: true
+          draggable: true,
         });
       }
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error("Error logging in:", error);
     }
   };
 
@@ -56,10 +58,13 @@ const Login = () => {
           onSubmit={handleSubmit}
         >
           <Form className="w-full max-w-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl text-blue-700 font-bold mb-4">Login</h1>
-            <IoIosHome className="text-2xl text-blue-700 cursor-pointer" onClick={()=>navigate("/welcome")} />
-          </div>
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-2xl text-blue-700 font-bold mb-4">Login</h1>
+              <IoIosHome
+                className="text-2xl text-blue-700 cursor-pointer"
+                onClick={() => navigate("/welcome")}
+              />
+            </div>
             <div className="mb-2">
               <label htmlFor="email" className="block text-gray-700 text-sm">
                 Email
@@ -98,20 +103,20 @@ const Login = () => {
             <div className="mt-2 text-center">
               <p className="text-gray-700">
                 Don&apos;t have an account?{" "}
-                <a href="/register" className="text-blue-500">
+                <a href={`/register?role=${role}`} className="text-blue-500">
                   Register here
                 </a>
               </p>
               <p className="text-md text-gray-700">Or login with</p>
               <div className="flex w-full gap-2 items-center justify-between">
-              <button className="btn w-full mt-2 bg-red-500 text-sm flex items-center justify-center gap-4">
-                <FcGoogle className="text-xl" />
-                Google
-              </button>
-              <button className="btn w-full mt-2 bg-blue-700 text-sm flex items-center justify-center gap-4">
-                <FaSquareFacebook className="text-xl" />
-                Facebook
-              </button>
+                <button className="btn w-full mt-2 bg-red-500 text-sm flex items-center justify-center gap-4">
+                  <FcGoogle className="text-xl" />
+                  Google
+                </button>
+                <button className="btn w-full mt-2 bg-blue-700 text-sm flex items-center justify-center gap-4">
+                  <FaSquareFacebook className="text-xl" />
+                  Facebook
+                </button>
               </div>
             </div>
           </Form>

@@ -17,14 +17,17 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(false);
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, role) => {
     try {
       const response = await axios.get("http://localhost:3000/users", {
-        params: { email, password },
+        params: { email, password, role },
       });
 
       if (response.data.length > 0) {
         const userData = response.data[0];
+        if (userData.role !== role) {
+          return false;
+        }
         const token = btoa(JSON.stringify(userData)); // Simple token creation
         userData.token = token;
         setUser(userData);
@@ -46,8 +49,17 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await axios.post("http://localhost:3000/users", userData);
-    //   const res = response.data;
+      const existingUser = await axios.get(
+        `http://localhost:3000/users?email=${userData.email}`
+      );
+      if (existingUser.data.length > 0) {
+        return false;
+      }
+      const response = await axios.post(
+        "http://localhost:3000/users",
+        userData
+      );
+      //   const res = response.data;
       return true;
     } catch (error) {
       console.error("Registration error:", error);
@@ -56,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, register, isLoading }}>
+    <AuthContext.Provider value={{ user, login, logout, register, isLoading, }}>
       {children}
     </AuthContext.Provider>
   );

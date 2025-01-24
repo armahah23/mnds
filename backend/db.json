@@ -1,26 +1,20 @@
 {
   "users": [
     {
-      "id": "1",
-      "fullName": "John Doe",
-      "phoneNumber": "1234567890",
-      "email": "john@example.com",
-      "password": "password123"
+      "id": "7690",
+      "name": "Publisher1",
+      "email": "publisher1@gmail.com",
+      "password": "publish123",
+      "phoneNumber": "0771234567",
+      "role": "publisher"
     },
     {
-      "id": "3deb",
-      "fullName": "Afrih",
-      "phoneNumber": "0776165628",
-      "email": "afriharm@gmail.com",
-      "password": "afrih123",
-      "confirmPassword": "afrih123"
-    },
-    {
-      "id": "3b5c",
+      "id": "7261",
       "name": "Asli",
       "email": "asli@gmail.com",
       "password": "asli1234",
-      "phoneNumber": "0779066923"
+      "phoneNumber": "0779066923",
+      "role": "user"
     }
   ]
 }
