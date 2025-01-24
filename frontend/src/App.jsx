@@ -4,6 +4,9 @@ import Registration from './components/Registration'
 import Login from './components/Login'
 import PublisherHome from './pages/PublisherHome'
 import NewPost from './components/NewPost'
+import { AuthProvider } from './context/AuthContext'
+import PrivateRoute from './components/PrivateRoute'
+import About from './pages/About'
 
 
 function App() {
@@ -11,16 +14,18 @@ function App() {
 
   return (
     <>
+      <AuthProvider>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/publisher'>
-          <Route path='home' element={<PublisherHome />} />
-          <Route path='newpost' element={<NewPost />} />
-          {/* Add other publisher-related routes here */}
+        <Route path="/register" element={<Registration />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+          <Route path='/publisher/*' element={<PublisherHome />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/newfeed' element={<NewPost />} />
         </Route>
       </Routes>
+    </AuthProvider>
     </>
   )
 }

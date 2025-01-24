@@ -2,13 +2,14 @@ import { FcGoogle } from "react-icons/fc";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import registeration from "../assets/images/registration.jpg";
 import Swal from "sweetalert2";
+import { useAuth } from "../context/AuthContext";
 
 const Registration = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const initialValues = {
     fullName: "",
@@ -32,17 +33,38 @@ const Registration = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.post("http://localhost:3000/users", values);
-      localStorage.setItem("user", JSON.stringify(response.data));
-      console.log("User registered successfully:", response.data);
-      Swal.fire({
-        title: "Registration Success!",
-        icon: "success",
-        draggable: true,
-      });
-      navigate("/login");
+      const userData = {
+        name: values.fullName,
+        email: values.email,
+        password: values.password,
+        phoneNumber: values.phoneNumber,
+      };
+
+      const success = await register(userData);
+      
+      if (success) {
+        Swal.fire({
+          title: "Registration Success!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate("/login");
+      } else {
+        Swal.fire({
+          title: "Registration Failed!",
+          text: "Email might already be registered",
+          icon: "error",
+          draggable: true,
+        });
+      }
     } catch (error) {
       console.error("Error registering user:", error);
+      Swal.fire({
+        title: "Registration Error!",
+        text: "Something went wrong",
+        icon: "error",
+        draggable: true,
+      });
     }
   };
 

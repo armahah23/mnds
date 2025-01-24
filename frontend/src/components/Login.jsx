@@ -2,12 +2,13 @@ import { FcGoogle } from "react-icons/fc";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import loginpage from '../assets/images/loginpage.jpg';
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const initialValues = {
@@ -24,15 +25,8 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.get('http://localhost:3000/users', {
-        params: {
-          email: values.email,
-          password: values.password,
-        },
-      });
-      if (response.data.length > 0) {
-        localStorage.setItem('user', JSON.stringify(response.data[0]));
-        console.log('User logged in successfully:', response.data[0]);
+      const success = await login(values.email, values.password);
+      if (success) {
         Swal.fire({
           title: "Login Success!",
           icon: "success",
@@ -40,16 +34,15 @@ const Login = () => {
         });
         navigate('/');
       } else {
-        console.error('Invalid email or password');
         Swal.fire({
           title: "Login Failed!",
           text: "Invalid email or password",
           icon: "error",
           draggable: true
-      });
-    }
+        });
+      }
     } catch (error) {
-      console.error('Error logging in user:', error);
+      console.error('Error logging in:', error);
     }
   };
 
