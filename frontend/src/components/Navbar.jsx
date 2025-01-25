@@ -21,8 +21,17 @@ function Navbar() {
           {user ? (
             <>
               <Link to="/">Home</Link>
+              {user.role === "publisher" ? (
+                <>
+                <Link to="/publisher/about">About</Link>
+              <Link to="/publisher/newsfeed">New Feed</Link>
+              </>
+              ) : (       
+                <>       
               <Link to="/about">About</Link>
               <Link to="/newfeed">New Feed</Link>
+              </>)
+              }
               <button onClick={logout} className="btn">
                 Logout
               </button>
@@ -40,7 +49,7 @@ function Navbar() {
         </div>
       </div>
       {isOpen && (
-        <div className="md:hidden absolute top-16 right-0 bg-yellow-700 w-full p-4">
+        <div className="md:hidden absolute top-16 right-0 bg-yellow-700 w-full p-4 z-40">
           <ul className="flex flex-col items-center gap-4 navStyle">
             {user ? (
               <>

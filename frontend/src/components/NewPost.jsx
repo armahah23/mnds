@@ -1,28 +1,30 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
-import axios from 'axios';
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 
 function NewPost() {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const validationSchema = Yup.object({
-    title: Yup.string().required('Title is required'),
-    description: Yup.string().required('Description is required'),
-    directedBy: Yup.string().required('Director name is required'),
-    releasedYear: Yup.number().required('Release year is required'),
-    cast: Yup.string().required('Cast is required'),
-    type: Yup.string().required('Type is required'),
+    title: Yup.string().required("Title is required"),
+    description: Yup.string().required("Description is required"),
+    directedBy: Yup.string().required("Director name is required"),
+    releasedYear: Yup.number().required("Release year is required"),
+    cast: Yup.string().required("Cast is required"),
+    type: Yup.string().required("Type is required"),
   });
 
   const handleImageChange = (e, setFieldValue) => {
     const file = e.target.files[0];
-    setFieldValue('image', file);
+    setFieldValue("image", file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -40,19 +42,20 @@ function NewPost() {
       const postData = {
         ...values,
         image: preview,
+        publisherId: user.id,
         createdAt: new Date().toISOString(),
-        id: Date.now().toString()
+        id: Date.now().toString(),
       };
 
-      await axios.post('http://localhost:3000/posts', postData);
-      
+      await axios.post("http://localhost:3000/posts", postData);
+
       resetForm();
       setPreview(null);
-      alert('Post created successfully!');
-      navigate('/publisher');
+      alert("Post created successfully!");
+      navigate("/publisher");
     } catch (err) {
-      setError('Failed to create post. Please try again.');
-      console.error('Error creating post:', err);
+      setError("Failed to create post. Please try again.");
+      console.error("Error creating post:", err);
     } finally {
       setLoading(false);
     }
@@ -61,24 +64,26 @@ function NewPost() {
   return (
     <div className="container mx-auto p-4 sm:p-6 bg-gray-50 min-h-screen">
       <div className="relative">
-        <button 
-          onClick={() => navigate('/publisher')}
+        <button
+          onClick={() => navigate("/publisher")}
           className="absolute right-0 top-0 text-gray-600 hover:text-gray-900"
         >
           <IoMdClose size={24} />
         </button>
-        
-        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8 text-gray-800">Create New Post</h2>
-        
+
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8 text-gray-800">
+          Create New Post
+        </h2>
+
         <Formik
           initialValues={{
-            title: '',
-            description: '',
-            directedBy: '',
-            releasedYear: '',
-            cast: '',
-            type: '',
-            image: null
+            title: "",
+            description: "",
+            directedBy: "",
+            releasedYear: "",
+            cast: "",
+            type: "",
+            image: null,
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -93,7 +98,11 @@ function NewPost() {
                     placeholder="Title"
                     className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
                   />
-                  <ErrorMessage name="title" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage
+                    name="title"
+                    component="div"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 <div>
@@ -104,7 +113,11 @@ function NewPost() {
                     placeholder="Description"
                     className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
                   />
-                  <ErrorMessage name="description" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage
+                    name="description"
+                    component="div"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 <div>
@@ -114,7 +127,11 @@ function NewPost() {
                     placeholder="Directed By"
                     className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
                   />
-                  <ErrorMessage name="directedBy" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage
+                    name="directedBy"
+                    component="div"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 <div>
@@ -124,7 +141,11 @@ function NewPost() {
                     placeholder="Released Year"
                     className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
                   />
-                  <ErrorMessage name="releasedYear" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage
+                    name="releasedYear"
+                    component="div"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 <div>
@@ -134,7 +155,11 @@ function NewPost() {
                     placeholder="Cast"
                     className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400"
                   />
-                  <ErrorMessage name="cast" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage
+                    name="cast"
+                    component="div"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 <div>
@@ -147,7 +172,11 @@ function NewPost() {
                     <option value="movie">Movie</option>
                     <option value="webseries">Web Series</option>
                   </Field>
-                  <ErrorMessage name="type" component="div" className="text-red-500 text-sm" />
+                  <ErrorMessage
+                    name="type"
+                    component="div"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
 
                 <div>

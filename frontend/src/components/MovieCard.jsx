@@ -1,9 +1,26 @@
-import { useState } from "react";
-import movies from "../assets/data/movie";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import MovieModal from "./MovieModal";
 
 function MovieCard() {
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/posts');
+        // Filter posts where type is "movie"
+        const moviePosts = response.data.filter(post => post.type === "movie");
+        setMovies(moviePosts);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
   return (
     <section className="p-4">
       <div>
@@ -24,9 +41,9 @@ function MovieCard() {
               </div>
               <h2 className="text-black text-xl">Title: {movie.title}</h2>
               <p className="text-gray-600 ">
-                Description: {movie.smallDescription}
+                Description: {movie.description}
               </p>
-              <p className="text-gray-600 ">Released: {movie.releaseYear}</p>
+              <p className="text-gray-600 ">Released: {movie.releasedYear}</p>
               <p className="text-gray-600 ">Directed: {movie.directedBy}</p>
             </div>
           ))}

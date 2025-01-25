@@ -122,7 +122,7 @@ const Login = () => {
           </Form>
         </Formik>
       </div>
-      <div className="md:w-1/2 flex items-center justify-center bg-gray-200">
+      <div className="hidden md:w-1/2 md:flex items-center justify-center bg-gray-200">
         <img
           src={loginpage}
           alt="Login"

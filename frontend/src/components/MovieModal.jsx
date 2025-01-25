@@ -33,7 +33,7 @@ function MovieModal({ movie, onClose }) {
           {/* Right Section */}
           <div className="w-full sm:w-2/3">
             <p className="text-gray-600 text-sm">Directed by: {movie.directedBy}</p>
-            <p className="text-gray-700 mt-2 text-sm sm:text-base">{movie.detailedDescription}</p>
+            <p className="text-gray-700 mt-2 text-sm sm:text-base">{movie.description}</p>
 
             <div className="mt-4">
               <h3 className="text-lg font-semibold">Rate & Comment</h3>

@@ -8,6 +8,7 @@ import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
 import About from './pages/About'
 import WelcomePage from './pages/WelcomePage'
+import NewsFeed from './pages/NewsFeed'
 
 
 function App() {
@@ -23,8 +24,10 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path='/publisher/*' element={<PublisherHome />} />
+          <Route path='/publisher/about' element={<About />} />
           <Route path='/about' element={<About />} />
           <Route path='/publisher/newfeed' element={<NewPost />} />
+          <Route path='/publisher/newsfeed' element={<NewsFeed />} />
         </Route>
       </Routes>
     </AuthProvider>
