@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
+import navlogo from '../assets/images/navLogo.png'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,8 +14,8 @@ function Navbar() {
 
   return (
     <nav className="bg-gradient-to-bl from-yellow-600 to-black py-4 px-6 flex justify-between items-center text-white">
-      <div className="flex items-center w-1/2">
-        <img src="" alt="logo" />
+      <div className="flex items-center w-1/2 ml-4 md:ml-8">
+        <img src={navlogo} alt="logo" className="h-10 w-20 md:h-20 md:w-40" />
       </div>
       <div className="w-1/2 py-2 flex justify-end items-center">
         <div className="hidden md:flex items-center gap-4 navStyle">
@@ -24,12 +25,12 @@ function Navbar() {
               {user.role === "publisher" ? (
                 <>
                 <Link to="/publisher/about">About</Link>
-              <Link to="/publisher/newsfeed">New Feed</Link>
+              <Link to="/publisher/newsfeed">News Feed</Link>
               </>
               ) : (       
                 <>       
               <Link to="/about">About</Link>
-              <Link to="/newfeed">New Feed</Link>
+              <Link to="/newfeed">News Feed</Link>
               </>)
               }
               <button onClick={logout} className="btn">
