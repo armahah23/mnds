@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gradient-to-bl from-yellow-700 to-yellow-300 py-4 px-6 flex justify-between items-center text-white">
+    <nav className="bg-gradient-to-r from-yellow-300 to-red-600 py-4 px-6 flex justify-between items-center text-white">
       <div className="flex items-center w-1/2 ml-4 md:ml-8">
         <img src={navlogo} alt="logo" className="h-10 w-20 md:h-20 md:w-40" />
       </div>
@@ -21,16 +21,16 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-4 navStyle">
           {user ? (
             <>
-              <Link to="/">Home</Link>
+              <Link to="/" className="link">Home</Link>
               {user.role === "publisher" ? (
                 <>
-                <Link to="/publisher/about">About</Link>
-              <Link to="/publisher/newsfeed">News Feed</Link>
+                <Link to="/publisher/about" className="link">About</Link>
+              <Link to="/publisher/newsfeed" className="link">News Feed</Link>
               </>
               ) : (       
                 <>       
-              <Link to="/about">About</Link>
-              <Link to="/newsfeed">News Feed</Link>
+              <Link to="/about" className="link">About</Link>
+              <Link to="/newsfeed" className="link">News Feed</Link>
               </>)
               }
               <button onClick={logout} className="btn">
@@ -54,13 +54,13 @@ function Navbar() {
           <ul className="flex flex-col items-center gap-4 navStyle">
             {user ? (
               <>
-                <Link to="/" onClick={toggleMenu}>
+                <Link to="/" onClick={toggleMenu} className="link">
                   Home
                 </Link>
-                <Link to="/about" onClick={toggleMenu}>
+                <Link to="/about" onClick={toggleMenu} className="link">
                   About
                 </Link>
-                <Link to="/newfeed" onClick={toggleMenu}>
+                <Link to="/newfeed" onClick={toggleMenu} className="link">
                   New Feed
                 </Link>
                 <button
