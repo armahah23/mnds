@@ -81,3 +81,8 @@ p, .p {
 .animate-fade-in {
   animation: fade-in 1s ease-out;
 }
+
+
+/* html {
+  scroll-behavior: smooth;
+} */

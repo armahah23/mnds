@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gradient-to-bl from-yellow-600 to-black py-4 px-6 flex justify-between items-center text-white">
+    <nav className="bg-gradient-to-bl from-yellow-700 to-yellow-300 py-4 px-6 flex justify-between items-center text-white">
       <div className="flex items-center w-1/2 ml-4 md:ml-8">
         <img src={navlogo} alt="logo" className="h-10 w-20 md:h-20 md:w-40" />
       </div>
@@ -30,7 +30,7 @@ function Navbar() {
               ) : (       
                 <>       
               <Link to="/about">About</Link>
-              <Link to="/newfeed">News Feed</Link>
+              <Link to="/newsfeed">News Feed</Link>
               </>)
               }
               <button onClick={logout} className="btn">

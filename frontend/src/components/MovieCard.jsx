@@ -40,11 +40,11 @@ function MovieCard() {
                 />
               </div>
               <h2 className="text-black text-xl">Title: {movie.title}</h2>
-              <p className="text-gray-600 ">
-                Description: {movie.description}
+              <p className="text-gray-600 "><span className="font-extrabold">
+                Description:</span> <span className="line-clamp-4">{movie.description}</span>
               </p>
-              <p className="text-gray-600 ">Released: {movie.releasedYear}</p>
-              <p className="text-gray-600 ">Directed: {movie.directedBy}</p>
+              <p className="text-gray-600 font-extrabold">Released: {movie.releasedYear}</p>
+              <p className="text-gray-600 font-extrabold">Directed: {movie.directedBy}</p>
             </div>
           ))}
         </div>
