@@ -1,18 +1,10 @@
 <p align="center">
-  <img src="./frontend/src/assets/images/navlogo.png" alt="MndS Logo" width="200" />
+  <img src="./frontend/src/assets/images/logo.jpeg" alt="MndS Logo" width="200" />
 </p>
 
 # MndS
 
 MndS is a comprehensive entertainment platform where users can explore movies and web series, view ratings, and get news about new releases. The platform supports multiple user roles including regular users and publishers
-
-<p align="center">
-  <span style="font-size: 4rem; font-weight: bold; color: #4299e1; animation: bounce 2s infinite;">MndS</span>
-  <br>
-  <span style="font-size: 1.5rem; color: #4a5568;">Movies and Web Series you loved</span>
-</p>
-
-MndS is a Movie and Web Series web application where users can log in or sign up, search for movies and web series, view ratings, and get news about new movie releases. The application is managed by an admin who handles all the content, while users can only view the information.
 
 ## User Roles
 
