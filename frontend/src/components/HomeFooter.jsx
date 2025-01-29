@@ -14,10 +14,10 @@ function HomeFooter() {
           <div className="mb-8 md:mb-0">
             <h3 className="text-xl font-semibold">Partners</h3>
             <ul className="list-disc list-inside">
-              <li>Partner 1</li>
-              <li>Partner 2</li>
-              <li>Partner 3</li>
-              <li>Partner 4</li>
+              <li>GEO Cenima</li>
+              <li>Star Cinematic</li>
+              <li>Marvel</li>
+              <li>Red Giant</li>
             </ul>
           </div>
           <div className="mb-8 md:mb-0">

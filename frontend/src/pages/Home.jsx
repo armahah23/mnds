@@ -4,6 +4,9 @@ import HomeFooter from "../components/HomeFooter"
 import { useState } from "react";
 import MovieCard from "../components/MovieCard";
 import WebSeries from "../components/WebSeries";
+import TrendingSection from "../components/TrendingSection";
+import ActorsGallery from "../components/ActorsGallery";
+import UpcomingRelease from "../components/UpcomingRelease";
 
 
 function Home() {
@@ -19,6 +22,16 @@ function Home() {
         <button className="btn" onClick={() => setActiveTab('webseries')}>Web Series</button>
       </div>
       {activeTab === 'movies' ? <MovieCard /> : <WebSeries />}
+
+      {/* Trending Section */}
+      <TrendingSection />
+
+      {/* Popular Actors */}
+      <ActorsGallery />
+
+      {/* Upcoming Releases */}
+      <UpcomingRelease />
+
       {/* Footer */}
       <HomeFooter />
     </div>
