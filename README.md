@@ -42,7 +42,7 @@ MndS is a comprehensive entertainment platform where users can explore movies an
 The project is divided into two separate frontends:
 
 1. **User Frontend:** Accessible at `localhost:3000`
-2. **Admin Frontend:** Accessible at `localhost:3001`
+
 
 ## Installation
 

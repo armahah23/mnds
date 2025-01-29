@@ -1,11 +1,11 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 import { IoMdOptions } from "react-icons/io";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 function PublisherHome() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function PublisherHome() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/posts");
+        const response = await axios.get("REACT_APP_LOCALHOST_ADDRESS/posts");
         const publisherPosts = response.data.filter(
           (post) => post.publisherId === user.id
         );
@@ -39,40 +39,42 @@ function PublisherHome() {
   const handleDelete = async (postId) => {
     try {
       const result = await Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
       });
 
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:3000/posts/${postId}`);
-        setPosts(posts.filter(post => post.id !== postId));
-        Swal.fire('Deleted!', 'Your post has been deleted.', 'success');
+        await axios.delete(`REACT_APP_LOCALHOST_ADDRESS/posts/${postId}`);
+        setPosts(posts.filter((post) => post.id !== postId));
+        Swal.fire("Deleted!", "Your post has been deleted.", "success");
       }
     } catch (error) {
       console.error("Error deleting post:", error);
-      Swal.fire('Error!', 'Failed to delete post.', 'error');
+      Swal.fire("Error!", "Failed to delete post.", "error");
     }
   };
 
   const handleUpdate = async (values) => {
     try {
-      await axios.put(`http://localhost:3000/posts/${editingPost.id}`, {
+      await axios.put(`REACT_APP_LOCALHOST_ADDRESS/posts/${editingPost.id}`, {
         ...editingPost,
-        ...values
+        ...values,
       });
-      setPosts(posts.map(post => 
-        post.id === editingPost.id ? { ...post, ...values } : post
-      ));
+      setPosts(
+        posts.map((post) =>
+          post.id === editingPost.id ? { ...post, ...values } : post
+        )
+      );
       setEditingPost(null);
-      Swal.fire('Updated!', 'Your post has been updated.', 'success');
+      Swal.fire("Updated!", "Your post has been updated.", "success");
     } catch (error) {
       console.error("Error updating post:", error);
-      Swal.fire('Error!', 'Failed to update post.', 'error');
+      Swal.fire("Error!", "Failed to update post.", "error");
     }
   };
 
@@ -122,39 +124,39 @@ function PublisherHome() {
               <div className="flex flex-col md:flex-row min-h-[400px]">
                 {/* Image Section */}
                 <div className="relative w-full md:w-1/2">
-                {/* Options Button */}
-                <div className="absolute top-2 right-2 z-10">
-                  <button
-                    onClick={() => setShowOptions(posts[currentIndex].id)}
-                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  >
-                    <IoMdOptions className="text-xl text-gray-600" />
-                  </button>
-                  
-                  {/* Options Dropdown */}
-                  {showOptions === posts[currentIndex].id && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
-                      <button
-                        onClick={() => {
-                          setEditingPost(posts[currentIndex]);
-                          setShowOptions(null);
-                        }}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                      >
-                        Update
-                      </button>
-                      <button
-                        onClick={() => {
-                          handleDelete(posts[currentIndex].id);
-                          setShowOptions(null);
-                        }}
-                        className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 w-full text-left"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </div>
+                  {/* Options Button */}
+                  <div className="absolute top-2 right-2 z-10">
+                    <button
+                      onClick={() => setShowOptions(posts[currentIndex].id)}
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                    >
+                      <IoMdOptions className="text-xl text-gray-600" />
+                    </button>
+
+                    {/* Options Dropdown */}
+                    {showOptions === posts[currentIndex].id && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+                        <button
+                          onClick={() => {
+                            setEditingPost(posts[currentIndex]);
+                            setShowOptions(null);
+                          }}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                        >
+                          Update
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDelete(posts[currentIndex].id);
+                            setShowOptions(null);
+                          }}
+                          className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 w-full text-left"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   <img
                     src={posts[currentIndex]?.image}
                     alt={posts[currentIndex]?.title}
@@ -234,22 +236,26 @@ function PublisherHome() {
                 directedBy: editingPost.directedBy,
                 releasedYear: editingPost.releasedYear,
                 cast: editingPost.cast,
-                type: editingPost.type
+                type: editingPost.type,
               }}
               onSubmit={handleUpdate}
             >
               {({ isSubmitting }) => (
                 <Form className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Title</label>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Title
+                    </label>
                     <Field
                       name="title"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
-                  
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Description</label>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Description
+                    </label>
                     <Field
                       name="description"
                       as="textarea"
@@ -260,14 +266,18 @@ function PublisherHome() {
 
                   <div className="flex gap-4">
                     <div className="flex-1">
-                      <label className="block text-sm font-medium text-gray-700">Director</label>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Director
+                      </label>
                       <Field
                         name="directedBy"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="block text-sm font-medium text-gray-700">Released Year</label>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Released Year
+                      </label>
                       <Field
                         name="releasedYear"
                         type="number"
@@ -277,7 +287,9 @@ function PublisherHome() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Cast</label>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Cast
+                    </label>
                     <Field
                       name="cast"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"

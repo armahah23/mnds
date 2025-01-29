@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, role) => {
     try {
-      const response = await axios.get("http://localhost:3000/users", {
+      const response = await axios.get("REACT_APP_LOCALHOST_ADDRESS/users", {
         params: { email, password, role },
       });
 
@@ -50,13 +50,13 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const existingUser = await axios.get(
-        `http://localhost:3000/users?email=${userData.email}`
+        `REACT_APP_LOCALHOST_ADDRESS/users?email=${userData.email}`
       );
       if (existingUser.data.length > 0) {
         return false;
       }
       const response = await axios.post(
-        "http://localhost:3000/users",
+        "REACT_APP_LOCALHOST_ADDRESS/users",
         userData
       );
       //   const res = response.data;
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, register, isLoading, }}>
+    <AuthContext.Provider value={{ user, login, logout, register, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

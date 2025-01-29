@@ -9,9 +9,11 @@ function WebSeries() {
   useEffect(() => {
     const fetchSeries = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/posts');
+        const response = await axios.get("REACT_APP_LOCALHOST_ADDRESS/posts");
         // Filter posts where type is "webseries"
-        const seriesPosts = response.data.filter(post => post.type === "webseries");
+        const seriesPosts = response.data.filter(
+          (post) => post.type === "webseries"
+        );
         setSeries(seriesPosts);
       } catch (error) {
         console.error("Error fetching web series:", error);
