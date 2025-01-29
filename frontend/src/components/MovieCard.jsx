@@ -9,7 +9,7 @@ function MovieCard() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("REACT_APP_LOCALHOST_ADDRESS/posts");
+        const response = await axios.get("http://localhost:3000/posts");
         // Filter posts where type is "movie"
         const moviePosts = response.data.filter(
           (post) => post.type === "movie"

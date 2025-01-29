@@ -9,7 +9,7 @@ function WebSeries() {
   useEffect(() => {
     const fetchSeries = async () => {
       try {
-        const response = await axios.get("REACT_APP_LOCALHOST_ADDRESS/posts");
+        const response = await axios.get("http://localhost:3000/posts");
         // Filter posts where type is "webseries"
         const seriesPosts = response.data.filter(
           (post) => post.type === "webseries"

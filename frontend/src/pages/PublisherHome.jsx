@@ -19,7 +19,7 @@ function PublisherHome() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("REACT_APP_LOCALHOST_ADDRESS/posts");
+        const response = await axios.get("http://localhost:3000/posts");
         const publisherPosts = response.data.filter(
           (post) => post.publisherId === user.id
         );
@@ -49,7 +49,7 @@ function PublisherHome() {
       });
 
       if (result.isConfirmed) {
-        await axios.delete(`REACT_APP_LOCALHOST_ADDRESS/posts/${postId}`);
+        await axios.delete(`http://localhost:3000/posts/${postId}`);
         setPosts(posts.filter((post) => post.id !== postId));
         Swal.fire("Deleted!", "Your post has been deleted.", "success");
       }
@@ -61,7 +61,7 @@ function PublisherHome() {
 
   const handleUpdate = async (values) => {
     try {
-      await axios.put(`REACT_APP_LOCALHOST_ADDRESS/posts/${editingPost.id}`, {
+      await axios.put(`http://localhost:3000/posts/${editingPost.id}`, {
         ...editingPost,
         ...values,
       });

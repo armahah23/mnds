@@ -47,7 +47,7 @@ function NewPost() {
         id: Date.now().toString(),
       };
 
-      await axios.post("REACT_APP_LOCALHOST_ADDRESS/posts", postData);
+      await axios.post("http://localhost:3000/posts", postData);
 
       resetForm();
       setPreview(null);
