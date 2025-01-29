@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 function NewPost() {
   const [preview, setPreview] = useState(null);
@@ -51,7 +52,11 @@ function NewPost() {
 
       resetForm();
       setPreview(null);
-      alert("Post created successfully!");
+      Swal.fire({
+        title: "Post Created Successfully!",
+        icon: "success",
+        draggable: true,
+      });
       navigate("/publisher");
     } catch (err) {
       setError("Failed to create post. Please try again.");

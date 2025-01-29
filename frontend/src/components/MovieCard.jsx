@@ -31,7 +31,7 @@ function MovieCard() {
           {movies.map((movie) => (
             <div
               key={movie.id}
-              className="p-4 border rounded shadow w-full bg-blue-100 cursor-pointer"
+              className="p-4 border rounded shadow w-full cursor-pointer"
               onClick={() => setSelectedMovie(movie)}
             >
               <div className="rounded-lg p-4 border-orange-500 border-2 mb-1">

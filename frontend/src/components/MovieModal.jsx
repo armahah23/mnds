@@ -27,7 +27,7 @@ function MovieModal({ movie, onClose }) {
               className="w-full h-[200px] sm:h-[250px] object-cover rounded-lg"
             />
             <h2 className="text-xl font-bold mt-2">{movie.title}</h2>
-            <p className="text-gray-600 text-sm">Released: {movie.releaseYear}</p>
+            <p className="text-gray-600 text-sm">Released: {movie.releasedYear}</p>
           </div>
 
           {/* Right Section */}

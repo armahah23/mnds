@@ -31,7 +31,7 @@ function WebSeries() {
           {series.map((series) => (
             <div
               key={series.id}
-              className="p-4 border rounded shadow w-full bg-blue-100"
+              className="p-4 border rounded shadow w-full"
               onClick={() => setSelectedSeries(series)}
             >
               <div className="rounded-lg p-4 border-orange-500 border-2 mb-1">
@@ -42,7 +42,7 @@ function WebSeries() {
                 />
               </div>
               <h2 className="text-black text-xl">Title: {series.title}</h2>
-              <p className="text-gray-600 ">
+              <p className="text-gray-600 line-clamp-4">
                 Description: {series.description}
               </p>
               <p className="text-gray-600 ">Released: {series.releasedYear}</p>

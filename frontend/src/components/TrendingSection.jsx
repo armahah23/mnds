@@ -5,12 +5,11 @@ import godfather from "../assets/images/thegodfather.jpg";
 import fightclub from "../assets/images/fightclub.jpg";
 
 function TrendingSection() {
-
   const trendingContent = [
     {
       id: 1,
       title: "The Dark Knight",
-      image: {thedarkknight},
+      image: thedarkknight,
       rating: 4.9,
       duration: "2h 32m",
       genre: "Action",
@@ -19,7 +18,7 @@ function TrendingSection() {
     {
       id: 2,
       title: "Inception",
-      image: {inception},
+      image: inception,
       rating: 4.8,
       duration: "2h 28m",
       genre: "Sci-Fi",
@@ -28,7 +27,7 @@ function TrendingSection() {
     {
       id: 3,
       title: "Pulp Fiction",
-      image: {pulpfiction},
+      image: pulpfiction,
       rating: 4.7,
       duration: "2h 34m",
       genre: "Crime",
@@ -37,7 +36,7 @@ function TrendingSection() {
     {
       id: 4,
       title: "The Godfather",
-      image: {godfather},
+      image: godfather,
       rating: 4.9,
       duration: "2h 55m",
       genre: "Crime",
@@ -46,7 +45,7 @@ function TrendingSection() {
     {
       id: 5,
       title: "Fight Club",
-      image: {fightclub},
+      image: fightclub,
       rating: 4.8,
       duration: "2h 19m",
       genre: "Drama",
@@ -55,7 +54,7 @@ function TrendingSection() {
   ];
 
   return (
-    <section className="py-12 bg-gray-800">
+    <section className="py-12 bg-gray-800 border-b-8 border-gray-700">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-white mb-8">
           Trending This Week
@@ -70,7 +69,7 @@ function TrendingSection() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit"
                 />
               </div>
               <div className="p-4">

@@ -3,6 +3,7 @@ import gameChanger from "../assets/images/gamechanger.jpeg";
 import madhaGajaRaja from "../assets/images/mathagajaraja.jpeg";
 
 function UpcomingRelease() {
+
   const nextRelease = [
     {
       id: 1,
@@ -10,15 +11,15 @@ function UpcomingRelease() {
       release_date: "2025-01-10",
       description:
         "Directed by Bala, 'Vanangaan' stars Arun Vijay in a gripping action drama set in Kanyakumari, revolving around a shocking and gruesome murder case.",
-      image: { vanangaan },
+      image: vanangaan,
     },
     {
       id: 2,
       title: "Game Changer",
+      image: gameChanger,
       release_date: "2025-01-10",
       description:
         "'Game Changer' is a political action thriller directed by Shankar, featuring Ram Charan and Kiara Advani. The film delves into political dynamics and power struggles.",
-      image: { gameChanger },
     },
     {
       id: 3,
@@ -26,7 +27,7 @@ function UpcomingRelease() {
       release_date: "2025-01-12",
       description:
         "After a long delay, 'Madha Gaja Raja' is an action-comedy directed by Sundar C, starring Vishal, Santhanam, and Anjali. The film promises a blend of high-octane action and humor.",
-      image: { madhaGajaRaja },
+      image: madhaGajaRaja,
     },
   ];
 
@@ -46,7 +47,7 @@ function UpcomingRelease() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover rounded"
+                  className="w-full h-full object-fit rounded"
                 />
               </div>
               <div className="flex-1">

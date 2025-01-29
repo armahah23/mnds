@@ -33,7 +33,7 @@ function WebSeriesModal({ series, onClose }) {
             />
             <h2 className="text-xl font-bold mt-2">{series.title}</h2>
             <p className="text-gray-600 text-sm">
-              Released: {series.releaseYear}
+              Released: {series.releasedYear}
             </p>
           </div>
 
@@ -43,7 +43,7 @@ function WebSeriesModal({ series, onClose }) {
               Directed by: {series.directedBy}
             </p>
             <p className="text-gray-700 mt-2 text-sm sm:text-base">
-              {series.detailedDescription}
+              {series.description}
             </p>
             <div className="mt-4">
               <h3 className="text-lg font-semibold">Rate & Comment</h3>

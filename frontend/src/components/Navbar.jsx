@@ -29,10 +29,10 @@ function Navbar() {
               </>
               ) : (       
                 <>       
-              <Link to="/about" className="link">About</Link>
               <Link to="/newsfeed" className="link">News Feed</Link>
               </>)
               }
+              <Link to={user.role === "user" ? "/about" : "/publisher/about"} className="link">About</Link>
               <button onClick={logout} className="btn">
                 Logout
               </button>
@@ -60,7 +60,7 @@ function Navbar() {
                 <Link to="/about" onClick={toggleMenu} className="link">
                   About
                 </Link>
-                <Link to="/newfeed" onClick={toggleMenu} className="link">
+                <Link to="/newsfeed" onClick={toggleMenu} className="link">
                   New Feed
                 </Link>
                 <button
