@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         if (userData.role !== role) {
           return false;
         }
-        const token = btoa(JSON.stringify(userData)); // Simple token creation
+        const token = btoa(JSON.stringify(userData)); 
         userData.token = token;
         setUser(userData);
         localStorage.setItem("user", JSON.stringify(userData));
