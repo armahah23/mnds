@@ -6,6 +6,8 @@ import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 import { IoMdOptions } from "react-icons/io";
 import Swal from "sweetalert2";
+import { LOCAL_HOST_URL } from "../../config/Config.js";
+
 
 function PublisherHome() {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ function PublisherHome() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/posts");
+        const response = await axios.get(`${LOCAL_HOST_URL}/posts`);
         const publisherPosts = response.data.filter(
           (post) => post.publisherId === user.id
         );
@@ -49,7 +51,7 @@ function PublisherHome() {
       });
 
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:3000/posts/${postId}`);
+        await axios.delete(`${LOCAL_HOST_URL}/posts/${postId}`);
         setPosts(posts.filter((post) => post.id !== postId));
         Swal.fire("Deleted!", "Your post has been deleted.", "success");
       }
@@ -61,7 +63,7 @@ function PublisherHome() {
 
   const handleUpdate = async (values) => {
     try {
-      await axios.put(`http://localhost:3000/posts/${editingPost.id}`, {
+      await axios.put(`${LOCAL_HOST_URL}/posts/${editingPost.id}`, {
         ...editingPost,
         ...values,
       });

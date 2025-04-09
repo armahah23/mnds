@@ -6,6 +6,8 @@ import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import Swal from "sweetalert2";
+import { LOCAL_HOST_URL } from "../../config/Config.js";
+
 
 function NewPost() {
   const [preview, setPreview] = useState(null);
@@ -48,7 +50,7 @@ function NewPost() {
         id: Date.now().toString(),
       };
 
-      await axios.post("http://localhost:3000/posts", postData);
+      await axios.post(`${LOCAL_HOST_URL}/posts`, postData);
 
       resetForm();
       setPreview(null);

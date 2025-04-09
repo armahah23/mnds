@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieModal from "./MovieModal";
+import { LOCAL_HOST_URL } from "../../config/Config.js";
 
 function MovieCard() {
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -9,7 +10,7 @@ function MovieCard() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/posts");
+        const response = await axios.get(`${LOCAL_HOST_URL}/posts`);
         // Filter posts where type is "movie"
         const moviePosts = response.data.filter(
           (post) => post.type === "movie"

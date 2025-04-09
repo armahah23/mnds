@@ -1,6 +1,8 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LOCAL_HOST_URL } from "../../config/Config.js";
+
 
 const AuthContext = createContext(null);
 
@@ -19,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, role) => {
     try {
-      const response = await axios.get("http://localhost:3000/users", {
+      const response = await axios.get(`${LOCAL_HOST_URL}/users`, {
         params: { email, password, role },
       });
 
@@ -50,15 +52,12 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const existingUser = await axios.get(
-        `http://localhost:3000/users?email=${userData.email}`
+        `${LOCAL_HOST_URL}/users?email=${userData.email}`
       );
       if (existingUser.data.length > 0) {
         return false;
       }
-      const response = await axios.post(
-        "http://localhost:3000/users",
-        userData
-      );
+      const response = await axios.post(`${LOCAL_HOST_URL}/users`, userData);
       //   const res = response.data;
       return true;
     } catch (error) {

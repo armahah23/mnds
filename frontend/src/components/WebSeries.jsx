@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import WebSeriesModal from "./WebSeriesModal";
+import { LOCAL_HOST_URL } from "../../config/Config.js";
+
 
 function WebSeries() {
   const [selectedSeries, setSelectedSeries] = useState(null);
@@ -9,7 +11,7 @@ function WebSeries() {
   useEffect(() => {
     const fetchSeries = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/posts");
+        const response = await axios.get(`${LOCAL_HOST_URL}/posts`);
         // Filter posts where type is "webseries"
         const seriesPosts = response.data.filter(
           (post) => post.type === "webseries"
